@@ -1,50 +1,54 @@
-# Welcome to your Expo app 👋
+# 🎮 Gyro Collector Game - Yasmim Bueno de Morais  
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> Status do Projeto: Concluído ✔️  
 
-## Get started
+---
 
-1. Install dependencies
+### Tabela de Conteúdos
+* [Descrição do Projeto](#descrição-do-projeto)
+* [Funcionalidades](#-funcionalidades)
+* [Tecnologias Utilizadas](#️-tecnologias-utilizadas)
+* [Funcionalidades Adicionais](#-funcionalidades-adicionais)
+* [Autor](#-autor)
+* [Licença](#-licença)
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+### Descrição do Projeto
+<p align="center">
+Este projeto é um jogo mobile desenvolvido com <b>React Native</b> e <b>Expo</b>, onde o jogador controla uma esfera utilizando o giroscópio do dispositivo. O objetivo é coletar orbes azuis na tela antes que o tempo acabe. O jogo agora conta com <b>placar, cronômetro regressivo, tela de início e tela de fim de jogo</b>.
+</p>
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+### 🚀 Funcionalidades
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- **Controle por Giroscópio:** Movimento suave da esfera principal inclinando o celular.  
+- **Geração Aleatória de Orbes:** Sempre que coletado, um novo orbe aparece em posição aleatória.  
+- **Placar Dinâmico:** A pontuação aumenta a cada orbe coletado.  
+- **Tela de Início:** Exibe título e botão estilizado para iniciar o jogo.  
+- **Cronômetro Regressivo:** Tempo de jogo limitado (configurável, padrão de 30s).  
+- **Tela de Fim de Jogo:** Mostra a pontuação final e botão para jogar novamente.  
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+### 🛠️ Tecnologias Utilizadas
 
-When you're ready, run:
+- **[React Native](https://reactnative.dev/)**  
+- **[Expo](https://expo.dev/)**  
+- **[Expo Sensors - Gyroscope](https://docs.expo.dev/versions/latest/sdk/gyroscope/)**  
+- **[JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)**
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Funcionalidades Adicionais
+- **Tela de Início:** Apresenta título chamativo e botão "Iniciar Jogo".
+- **Cronômetro Regressivo:** Limita o tempo de partida (30 segundos padrão).
+- **Tela de Fim de Jogo:** Exibe pontuação final e opção de reiniciar.
+- **Placar Dinâmico:** A pontuação aumenta em tempo real conforme o jogador coleta os orbes.
 
-## Learn more
+## Autor
+- Yasmim Bueno de Morais - [GitHub](https://github.com/YMorais/) - yasmim.morais.senai@gmail.com  
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Licença  
+Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
