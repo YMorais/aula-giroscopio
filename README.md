@@ -6,6 +6,7 @@
 
 ### Tabela de Conteúdos
 * [Descrição do Projeto](#descrição-do-projeto)
+* [Demonstração da Aplicação](#demonstração-da-aplicação)
 * [Funcionalidades](#-funcionalidades)
 * [Tecnologias Utilizadas](#️-tecnologias-utilizadas)
 * [Funcionalidades Adicionais](#-funcionalidades-adicionais)
@@ -17,6 +18,17 @@
 ### Descrição do Projeto
 <p align="center">
 Este projeto é um jogo mobile desenvolvido com <b>React Native</b> e <b>Expo</b>, onde o jogador controla uma esfera utilizando o giroscópio do dispositivo. O objetivo é coletar orbes azuis na tela antes que o tempo acabe. O jogo agora conta com <b>placar, cronômetro regressivo, tela de início e tela de fim de jogo</b>.
+</p>
+
+---
+
+### Demonstração da Aplicação
+<p align="center">
+    <img src="assets/images/tela_inicio.jpg" alt="Tela de Inicio" width="100"/>
+    <img src="assets/images/placar.jpg" alt="Placar" width="94"/>
+    <img src="assets/images/contagem.jpg" alt="Contagem regressiva " width="94"/>
+    <img src="assets/images/coleta.jpg" alt="Coletando orbes" width="94"/>
+    <img src="assets/images/tela_fim.jpg" alt="Tela de Fim" width="94"/>
 </p>
 
 ---

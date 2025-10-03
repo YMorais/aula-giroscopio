@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from "react-native";
 import { Gyroscope } from "expo-sensors";
 
-const { width, height } = Dimensions.get("window");
-const PLAYER_SIZE = 50;
-const ORB_SIZE = 30;
-const GAME_TIME = 30; // tempo inicial (em segundos)
+// --- Configurações iniciais ---
+const { width, height } = Dimensions.get("window"); // Pega as dimensões da tela
+const PLAYER_SIZE = 50; // Tamanho do jogador (círculo controlado pelo giroscópio)
+const ORB_SIZE = 30;    // Tamanho do orbe (círculo azul para coletar)
+const GAME_TIME = 30;   // Tempo inicial do jogo (em segundos)
 
-// Gera posição aleatória do orbe
+// --- Função para gerar posição aleatória do orbe ---
 const generateRandomPosition = () => {
   return {
     x: Math.random() * (width - ORB_SIZE),
@@ -16,38 +17,49 @@ const generateRandomPosition = () => {
 };
 
 export default function App() {
+  // Estado para armazenar os dados do giroscópio
   const [data, setData] = useState({ x: 0, y: 0, z: 0 });
+
+  // Estado do jogador (posição na tela)
   const [playerPosition, setPlayerPosition] = useState({
-    x: width / 2,
+    x: width / 2, // começa no meio da tela
     y: height / 2,
   });
+
+  // Estado do orbe (posição aleatória inicial)
   const [orbPosition, setOrbPosition] = useState(generateRandomPosition());
+
+  // Estado do placar
   const [score, setScore] = useState(0);
 
-  const [gameState, setGameState] = useState("start"); 
-  // "start" | "playing" | "gameover"
+  // Estado do jogo (start | playing | gameover)
+  const [gameState, setGameState] = useState("start");
 
+  // Estado do tempo restante
   const [timeLeft, setTimeLeft] = useState(GAME_TIME);
 
-  // --- Sensor ---
+  // --- Sensor Giroscópio ---
   useEffect(() => {
     if (gameState !== "playing") return;
 
+    // Atualiza os dados do giroscópio a cada 16ms
     Gyroscope.setUpdateInterval(16);
     const subscription = Gyroscope.addListener((gyroscopeData) => {
-      setData(gyroscopeData);
+      setData(gyroscopeData); // Atualiza os dados do giroscópio
     });
 
-    return () => subscription.remove();
+    return () => subscription.remove(); // Remove quando parar
   }, [gameState]);
 
-  // --- Movimento ---
+  // --- Movimento do jogador ---
   useEffect(() => {
     if (gameState !== "playing") return;
 
+    // Movimento do jogador baseado no giroscópio
     let newX = playerPosition.x - data.y * 10;
     let newY = playerPosition.y - data.x * 10;
 
+    // Impede que o jogador saia da tela
     if (newX < 0) newX = 0;
     if (newX > width - PLAYER_SIZE) newX = width - PLAYER_SIZE;
     if (newY < 0) newY = 0;
@@ -56,10 +68,11 @@ export default function App() {
     setPlayerPosition({ x: newX, y: newY });
   }, [data]);
 
-  // --- Colisão com orbe ---
+  // --- Colisão com o orbe ---
   useEffect(() => {
     if (gameState !== "playing") return;
 
+    // Calcula a distância entre o jogador e o orbe
     const playerCenterX = playerPosition.x + PLAYER_SIZE / 2;
     const playerCenterY = playerPosition.y + PLAYER_SIZE / 2;
     const orbCenterX = orbPosition.x + ORB_SIZE / 2;
@@ -69,42 +82,44 @@ export default function App() {
     const dy = playerCenterY - orbCenterY;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
+    // Se a distância for menor que a soma dos raios, houve colisão
     if (distance < PLAYER_SIZE / 2 + ORB_SIZE / 2) {
-      setOrbPosition(generateRandomPosition());
-      setScore((prev) => prev + 1);
+      setOrbPosition(generateRandomPosition()); // Gera novo orbe
+      setScore((prev) => prev + 1); // Aumenta pontuação
     }
   }, [playerPosition]);
 
-  // --- Timer ---
+  // --- Timer do jogo ---
   useEffect(() => {
     if (gameState !== "playing") return;
 
-    setTimeLeft(GAME_TIME); // reseta sempre que iniciar
+    setTimeLeft(GAME_TIME); // Reseta tempo ao iniciar
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
-          clearInterval(interval);
-          setGameState("gameover");
+          clearInterval(interval);   // Para o timer
+          setGameState("gameover");  // Termina o jogo
           return 0;
         }
-        return prev - 1;
+        return prev - 1; // Decrementa tempo
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // Limpa intervalo
   }, [gameState]);
 
-  // --- Iniciar / Reiniciar ---
+  // --- Função para iniciar o jogo ---
   const startGame = () => {
-    setScore(0);
-    setPlayerPosition({ x: width / 2, y: height / 2 });
-    setOrbPosition(generateRandomPosition());
-    setTimeLeft(GAME_TIME);
-    setGameState("playing");
+    setScore(0); // Reseta placar
+    setPlayerPosition({ x: width / 2, y: height / 2 }); // Reposiciona jogador
+    setOrbPosition(generateRandomPosition()); // Novo orbe
+    setTimeLeft(GAME_TIME); // Reseta tempo
+    setGameState("playing"); // Muda estado para jogando
   };
 
+  // --- Função para reiniciar (voltar ao menu) ---
   const restartGame = () => {
-    setGameState("start");
+    setGameState("start"); // Volta para tela inicial
   };
 
   return (
@@ -126,6 +141,7 @@ export default function App() {
           <Text style={styles.score}>Placar: {score}</Text>
           <Text style={styles.timer}>⏱️ Tempo: {timeLeft}s</Text>
 
+          {/* Orbe (círculo azul) */}
           <View
             style={[
               styles.orb,
@@ -133,6 +149,7 @@ export default function App() {
             ]}
           />
 
+          {/* Jogador (círculo coral) */}
           <View
             style={[
               styles.player,
@@ -160,7 +177,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#2c3e50",
+    backgroundColor: "#2c3e50", // Fundo escuro
   },
   center: {
     flex: 1,
@@ -223,7 +240,7 @@ const styles = StyleSheet.create({
     width: PLAYER_SIZE,
     height: PLAYER_SIZE,
     borderRadius: PLAYER_SIZE / 2,
-    backgroundColor: "coral",
+    backgroundColor: "coral", // Cor do jogador
     borderWidth: 2,
     borderColor: "#fff",
   },
@@ -232,7 +249,7 @@ const styles = StyleSheet.create({
     width: ORB_SIZE,
     height: ORB_SIZE,
     borderRadius: ORB_SIZE / 2,
-    backgroundColor: "#3498db",
+    backgroundColor: "#3498db", // Cor do orbe
     borderWidth: 2,
     borderColor: "#fff",
   },
