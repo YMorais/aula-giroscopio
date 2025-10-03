@@ -24,11 +24,11 @@ Este projeto é um jogo mobile desenvolvido com <b>React Native</b> e <b>Expo</b
 
 ### Demonstração da Aplicação
 <p align="center">
-    <img src="assets/images/tela_inicio.jpg" alt="Tela de Inicio" width="100"/>
-    <img src="assets/images/placar.jpg" alt="Placar" width="94"/>
-    <img src="assets/images/contagem.jpg" alt="Contagem regressiva " width="94"/>
-    <img src="assets/images/coleta.jpg" alt="Coletando orbes" width="94"/>
-    <img src="assets/images/tela_fim.jpg" alt="Tela de Fim" width="94"/>
+    <img src="assets/images/tela_inicio.jpg" alt="Tela de Inicio" width="150"/>
+    <img src="assets/images/placar.jpg" alt="Placar" width="142"/>
+    <img src="assets/images/contagem.jpg" alt="Contagem regressiva " width="142"/>
+    <img src="assets/images/coleta.jpg" alt="Coletando orbes" width="142"/>
+    <img src="assets/images/tela_fim.jpg" alt="Tela de Fim" width="142"/>
 </p>
 
 ---
